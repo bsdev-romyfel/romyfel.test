@@ -1,0 +1,92 @@
+@using GroovEcoBlazor1.Models
+
+
+<div class="newsfeed-container">
+    <h2 class="section-title">📰 Dernières actualités en immigration</h2>
+
+    @if (Articles == null || Articles.Count == 0)
+    {
+        <p>Aucune nouvelle disponible pour le moment.</p>
+    }
+    else
+    {
+        <div class="news-list">
+            @foreach (var item in Articles)
+            {
+                <div class="news-card">
+                    <h3>@item.Title</h3>
+                    <p class="news-date">@item.Date.ToString("dd MMM yyyy")</p>
+                    <p>@item.Summary</p>
+                    <a href="@item.Link" target="_blank" class="read-more">Lire plus →</a>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<NewsItem> Articles = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Exemple statique (à remplacer par un appel API plus tard)
+        Articles = new List<NewsItem>
+        {
+            new() { Title = "Nouveaux quotas pour 2025",
+                    Summary = "Le gouvernement canadien annonce une augmentation du nombre de résidents permanents pour 2025.",
+                    Link = "https://www.canada.ca/fr/immigration-refugies-citoyennete.html",
+                    Date = DateTime.Now.AddDays(-2) },
+            new() { Title = "Programme de mobilité internationale : nouvelles mesures",
+                    Summary = "De nouvelles règles entrent en vigueur pour les travailleurs temporaires à partir de novembre 2025.",
+                    Link = "https://www.canada.ca/fr/immigration-refugies-citoyennete.html",
+                    Date = DateTime.Now.AddDays(-7) }
+        };
+        await Task.CompletedTask;
+    }
+}
+
+@* <!-- start sw-rss-feed code --> 
+<script type="text/javascript"> 
+<!-- 
+rssfeed_url = new Array(); 
+rssfeed_url[0]="https://api.io.canada.ca/io-server/gc/news/en/v2?dept=departmentofcitizenshipandimmigration&sort=publishedDate&orderBy=desc&publishedDate%3E=2021-07-23&pick=50&format=atom&atomtitle=Immigration,%20Refugees%20and%20Citizenship%20Canada"; rssfeed_url[1]="https://api.io.canada.ca/io-server/gc/news/en/v2?dept=departmentofcitizenshipandimmigration&sort=publishedDate&orderBy=desc&publishedDate%3E=2021-07-23&pick=50&format=atom&atomtitle=Immigration,%20Refugees%20and%20Citizenship%20Canada";  
+rssfeed_frame_width="230"; 
+rssfeed_frame_height="260"; 
+rssfeed_scroll="on"; 
+rssfeed_scroll_step="6"; 
+rssfeed_scroll_bar="off"; 
+rssfeed_target="_blank"; 
+rssfeed_font_size="12"; 
+rssfeed_font_face=""; 
+rssfeed_border="on"; 
+rssfeed_css_url="https://feed.surfing-waves.com/css/style6.css"; 
+rssfeed_title="on"; 
+rssfeed_title_name=""; 
+rssfeed_title_bgcolor="#3366ff"; 
+rssfeed_title_color="#fff"; 
+rssfeed_title_bgimage=""; 
+rssfeed_footer="off"; 
+rssfeed_footer_name="rss feed"; 
+rssfeed_footer_bgcolor="#fff"; 
+rssfeed_footer_color="#333"; 
+rssfeed_footer_bgimage=""; 
+rssfeed_item_title_length="50"; 
+rssfeed_item_title_color="#666"; 
+rssfeed_item_bgcolor="#fff"; 
+rssfeed_item_bgimage=""; 
+rssfeed_item_border_bottom="on"; 
+rssfeed_item_source_icon="off"; 
+rssfeed_item_date="off"; 
+rssfeed_item_description="on"; 
+rssfeed_item_description_length="120"; 
+rssfeed_item_description_color="#666"; 
+rssfeed_item_description_link_color="#333"; 
+rssfeed_item_description_tag="off"; 
+rssfeed_no_items="0"; 
+rssfeed_cache = "ade3ef82c2ab926a3d376f4107c8e4f6"; 
+//--> 
+</script> 
+<script type="text/javascript" src="//feed.surfing-waves.com/js/rss-feed.js"></script> 
+<!-- The link below helps keep this service FREE, and helps other people find the SW widget. Please be cool and keep it! Thanks. --> 
+<div style="color:#ccc;font-size:10px; text-align:right; width:230px;">powered by <a href="https://surfing-waves.com" rel="noopener" target="_blank" style="color:#ccc;">Surfing Waves</a></div> 
+<!-- end sw-rss-feed code --> *@

@@ -1,0 +1,89 @@
+@page "/services"
+
+
+@using GroovEcoBlazor1.Models
+
+<div class="services-container">
+    <h2 class="section-title">Nos Services</h2>
+
+    <div class="services-grid">
+        @foreach (var service in Service)
+        {
+            <div class="service-card @(SelectedService == service ? "active" : "")"
+                 @onclick="() => ToggleService(service)">
+                <i class="@service.Icon"></i>
+                <h3>@service.Title</h3>
+                <p>@service.Description</p>
+            </div>
+        }
+    </div>
+
+    @if (SelectedService != null)
+    {
+        <div class="service-details">
+            <h3>@SelectedService.Title</h3>
+            <p>@SelectedService.Details</p>
+            <button class="close-btn" @onclick="() => SelectedService = null">Fermer</button>
+        </div>
+    }
+</div>
+
+@code {
+    private List<ServiceItem> Service = new();
+    private ServiceItem? SelectedService;
+
+    protected override void OnInitialized()
+    {
+        Service = new List<ServiceItem>
+        {
+            new() { Title = "Études au Canada",
+                    Description = "Assistance pour obtenir votre permis d’études.",
+                    Details = "Nous vous aidons à préparer vos documents, choisir un établissement, et soumettre une demande conforme aux exigences d’IRCC.",
+                    Icon = "fa-solid fa-graduation-cap" },
+
+            new() { Title = "Résidence Permanente",
+                    Description = "Programmes Express Entry, PNP, etc.",
+                    Details = "Nous analysons votre profil et vous guidons dans la meilleure voie pour obtenir la résidence permanente au Canada.",
+                    Icon = "fa-solid fa-passport" },
+
+            new() { Title = "Parrainage familial",
+                    Description = "Aidez vos proches à vous rejoindre au Canada.",
+                    Details = "Nous vous accompagnons dans le processus complet de parrainage pour époux(se), enfants ou parents.",
+                    Icon = "fa-solid fa-people-group" }
+        };
+    }
+
+    private void ToggleService(ServiceItem service)
+    {
+        if (SelectedService == service)
+            SelectedService = null;
+        else
+            SelectedService = service;
+    }
+}
+
+
+@* <section id="services">
+<div class="services">
+<div class="card">
+<div style="font-size:22px">🏠</div>
+<h3>Programmes de résidence permanente</h3>
+<p style="color:var(--muted)">Évaluation, préparation et dépôt de dossiers pour résidence permanente.</p>
+</div>
+<div class="card">
+<div style="font-size:22px">🎓</div>
+<h3>Permis de travail & études</h3>
+<p style="color:var(--muted)">Accompagnement pour étudiants internationaux et travailleurs temporaires.</p>
+</div>
+<div class="card">
+<div style="font-size:22px">👨‍👩‍👧</div>
+<h3>Regroupement familial</h3>
+<p style="color:var(--muted)">Sponsorship familial et aide à la préparation des dossiers.</p>
+</div>
+<div class="card">
+<div style="font-size:22px">⚡</div>
+<h3>Express Entry & PNP</h3>
+<p style="color:var(--muted)">Optimisation du profil et gestion des candidatures.</p>
+</div>
+</div>
+</section> *@

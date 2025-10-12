@@ -1,0 +1,31 @@
+﻿@page "/"
+@using GroovEcoBlazor1.Shared
+@using GroovEcoBlazor1.Components
+
+
+<PageTitle>Home</PageTitle>
+
+@*<NavBar />  *@  
+<Hero />
+<Testimonials />
+@* <div class="container">
+    <Hero />
+    <Services />
+    <About />
+    <Testimonials />
+    <Booking />
+    <ContactForm />
+</div>
+ *@<Footer />
+
+@*
+--- Notes ---
+1) Replace the Calendly iframe src with your actual Calendly URL.
+2) The ContactForm currently simulates sending (no backend). To make it real, implement an API endpoint (Azure Function, server API) and call it via HttpClient in HandleValidSubmit.
+3) Add any images under wwwroot/images and replace the placeholder hero image reference.
+4) For production, configure SPAs on your host (e.g., GitHub Pages, Azure Static Web Apps, or IIS with URL rewrite).
+
+Bonne mise en place — si tu veux, je peux maintenant :
+- générer les fichiers séparés dans le canevas (un par fichier) pour que tu puisses copier-coller, ou
+- te fournir les instructions pas-à-pas pour créer le projet avec `dotnet new blazorwasm` et coller ces fichiers automatiquement.
+*@

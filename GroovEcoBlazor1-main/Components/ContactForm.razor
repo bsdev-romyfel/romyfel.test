@@ -1,0 +1,47 @@
+@using GroovEcoBlazor1.Models
+@page "/contact"
+
+<section id="contact" style="margin-top:24px;  justify-content:center;">
+    <h2>Contactez-nous</h2>
+    <p style="color:var(--muted)">Remplissez le formulaire pour une première évaluation gratuite.</p>
+
+    <EditForm Model="contact" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div style="display:grid; gap:8px; max-width:640px; margin-top:12px">
+            <InputText @bind-Value="contact.FullName" placeholder="Nom complet" class="card" />
+            <ValidationMessage For="() => contact.FullName" />
+
+            <InputText @bind-Value="contact.Email" placeholder="Email" class="card" />
+            <ValidationMessage For="() => contact.Email" />
+
+            <InputText @bind-Value="contact.Phone" placeholder="Téléphone (optionnel)" class="card" />
+
+            <InputTextArea @bind-Value="contact.Message" placeholder="Votre message" rows="5" class="card" />
+            <ValidationMessage For="() => contact.Message" />
+
+            <button type="submit" class="btn-primary">Envoyer</button>
+
+            @if (success)
+                {
+                    <div style="color:green; margin-top:8px">Merci ! Votre message a été envoyé (simulation).</div>
+                }
+        </div>
+    </EditForm>
+</section>
+
+@code{
+private ContactModel contact = new ContactModel();
+private bool success = false;
+
+private async Task HandleValidSubmit()
+{
+// Simulation: ici vous pouvez appeler une API (ex: Azure Function, API Controller) pour envoyer un email
+await Task.Delay(400); // simulate work
+success = true;
+// reset form if you want:
+contact = new ContactModel();
+StateHasChanged();
+}
+}
